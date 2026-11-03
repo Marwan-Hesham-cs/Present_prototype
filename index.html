@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الذكاء الاصطناعي ومستقبل سوق العمل - نموذج عرض تقديمي تفاعلي</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        bgDark: '#0b0f19',
+                        bgCard: 'rgba(15, 23, 42, 0.75)',
+                        neonCyan: '#06b6d4',
+                        neonPurple: '#8b5cf6',
+                        neonGreen: '#10b981',
+                        neonPink: '#ec4899',
+                        neonAmber: '#f59e0b'
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'glow-cyan': '0 0 25px rgba(6, 182, 212, 0.25)',
+                        'glow-purple': '0 0 25px rgba(139, 92, 246, 0.25)',
+                        'glow-green': '0 0 25px rgba(16, 185, 129, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .ambient-glow-1 {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(11, 15, 25, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(11, 15, 25, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.2);
+        }
+
+        /* Slide Animation Transitions */
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 110px);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.96) translateX(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateX(0);
+            z-index: 2;
+        }
+
+        /* Custom Scrollbar for inner cards */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(6, 182, 212, 0.4);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(6, 182, 212, 0.8);
+        }
+
+        /* Pulsing dot */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.08); }
+        }
+        .pulse-effect {
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen relative flex flex-col justify-between overflow-hidden bg-bgDark text-slate-100">
+
+    <!-- Background Ambient Glow Effects -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Top Header Bar -->
+    <header class="relative z-10 w-full px-6 py-4 flex justify-between items-center border-b border-slate-800/80 bg-slate-950/40 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-glow-cyan">
+                <i class="fa-solid font-bold fa-brain"></i>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-lg md:text-xl bg-gradient-to-r from-cyan-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
+                    الذكاء الاصطناعي ومستقبل سوق العمل
+                </h1>
+                <p class="text-xs text-slate-400">العرض التقديمي التفاعلي المتقدم | 2026</p>
+            </div>
+        </div>
+
+        <!-- Top Right Controls -->
+        <div class="flex items-center gap-3">
+            <!-- Presenter Notes Toggle Button -->
+            <button id="toggleNotesBtn" title="ملاحظات الملقي" class="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 text-xs font-semibold border border-slate-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-file-lines text-cyan-400"></i>
+                <span class="hidden md:inline">ملاحظات العرض</span>
+            </button>
+
+            <!-- Thumbnails Overview Button -->
+            <button id="toggleGridBtn" title="عرض جميع الشرائح" class="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 text-xs font-semibold border border-slate-700 transition flex items-center gap-2">
+                <i class="fa-solid fa-border-all text-purple-400"></i>
+                <span class="hidden md:inline">نظرة عامة</span>
+            </button>
+
+            <!-- Fullscreen Button -->
+            <button id="fullscreenBtn" title="ملء الشاشة" class="w-9 h-9 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 flex items-center justify-center transition">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Top Progress Bar -->
+    <div class="w-full bg-slate-800/50 h-1.5 relative z-20">
+        <div id="progressBar" class="h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 transition-all duration-300 w-1/12 shadow-[0_0_10px_#06b6d4]"></div>
+    </div>
+
+    <!-- MAIN SLIDES CONTAINER -->
+    <main class="slide-container flex-1 max-w-7xl mx-auto w-full px-4 md:px-8">
+
+        <!-- SLIDE 1: Title Slide -->
+        <section class="slide active" data-slide="1">
+            <div class="max-w-4xl mx-auto text-center space-y-6 relative z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs md:text-sm font-semibold mb-2 shadow-glow-cyan">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    استشراف المستقبل والتطور الرقمي
+                </div>
+
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-white">
+                    الذكاء الاصطناعي و<span class="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">مستقبل سوق العمل</span>
+                </h1>
+
+                <p class="text-base md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    تحليل شامل للفرص الواعدة، التحديات الهيكلية، وخارطة الطريق العملية للجاهزية والتميز في عصر الآلات الذكية.
+                </p>
+
+                <div class="pt-6 flex flex-wrap justify-center items-center gap-4">
+                    <button onclick="nextSlide()" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white font-bold shadow-glow-cyan hover:scale-105 transition duration-300 flex items-center gap-3">
+                        <span>ابدأ العرض التقديمي</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button onclick="openModal('gridModal')" class="px-6 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold transition flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-cyan-400"></i>
+                        <span>جدول المحتويات</span>
+                    </button>
+                </div>
+
+                <div class="pt-10 grid grid-cols-2 md:grid-cols-4 gap-4 text-right">
+                    <div class="glass-card p-3.5 rounded-xl border-r-2 border-r-cyan-400">
+                        <div class="text-xs text-slate-400">المحتوى</div>
+                        <div class="text-sm font-bold text-white">12 شريحة متكاملة</div>
+                    </div>
+                    <div class="glass-card p-3.5 rounded-xl border-r-2 border-r-purple-400">
+                        <div class="text-xs text-slate-400">النموذج</div>
+                        <div class="text-sm font-bold text-white">تفاعلي عالي الجودة</div>
+                    </div>
+                    <div class="glass-card p-3.5 rounded-xl border-r-2 border-r-emerald-400">
+                        <div class="text-xs text-slate-400">الهدف</div>
+                        <div class="text-sm font-bold text-white">إبهار العميل والمستثمرين</div>
+                    </div>
+                    <div class="glass-card p-3.5 rounded-xl border-r-2 border-r-pink-400">
+                        <div class="text-xs text-slate-400">اللغة والاتجاه</div>
+                        <div class="text-sm font-bold text-white">العربية (RTL)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: Agenda / Table of Contents -->
+        <section class="slide" data-slide="2">
+            <div class="space-y-6">
+                <div class="text-center md:text-right space-y-2">
+                    <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider">نظرة عامة</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold text-white">جدول المحتويات والمحاور الرئيسة</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div onclick="goToSlide(3)" class="glass-card p-4 rounded-xl cursor-pointer flex items-start gap-4 hover:border-cyan-400">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg shrink-0">01</div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">المقدمة والإحصائيات</h3>
+                            <p class="text-xs text-slate-400 mt-1">مدخل لثورة الذكاء الاصطناعي والأرقام الحاكمة للمستقبل.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="goToSlide(4)" class="glass-card p-4 rounded-xl cursor-pointer flex items-start gap-4 hover:border-cyan-400">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg shrink-0">02</div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">أبرز التطبيقات العملية</h3>
+                            <p class="text-xs text-slate-400 mt-1">كيف يغير الذكاء الاصطناعي القطاعات الحيوية اليوم؟</p>
+                        </div>
+                    </div>
+
+                    <div onclick="goToSlide(5)" class="glass-card p-4 rounded-xl cursor-pointer flex items-start gap-4 hover:border-cyan-400">
+                        <div class="w-10 h-10 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-lg shrink-0">03</div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">الأتمتة مقابل التعزيز</h3>
+                            <p class="text-xs text-slate-400 mt-1">تأثير الذكاء الاصطناعي المباشر على الوظائف القائمة.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="goToSlide(6)" class="glass-card p-4 rounded-xl cursor-pointer flex items-start gap-4 hover:border-cyan-400">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg shrink-0">04</div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">الوظائف الأكثر تأثراً</h3>
+                            <p class="text-xs text-slate-400 mt-1">تحديد القطاعات المعرضة للأتمتة والأدوار المهددة.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="goToSlide(7)" class="glass-card p-4 rounded-xl cursor-pointer flex items-start gap-4 hover:border-cyan-400">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg shrink-0">05</div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">الوظائف الناشئة والمستقبلية</h3>
+                            <p class="text-xs text-slate-400 mt-1">مهن جديدة تفتح آفاقاً غير مسبوقة لسوق العمل.</p>
+                        </div>
+                    </div>
+
+                    <div onclick="goToSlide(8)" class="glass-card p-4 rounded-xl cursor-pointer flex items-start gap-4 hover:border-cyan-400">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-lg shrink-0">06</div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">مصفوفة المهارات والمستقبل</h3>
+                            <p class="text-xs text-slate-400 mt-1">مقارنة التجهيز البشري بالقدرات الخوارزمية للآلة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: Introduction & Statistics -->
+        <section class="slide" data-slide="3">
+            <div class="space-y-6">
+                <div class="border-r-4 border-cyan-400 pr-4">
+                    <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider">المحور الأول</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">مقدمة: ثورة الذكاء الاصطناعي في بيئة العمل</h2>
+                    <p class="text-sm text-slate-300 mt-1">نحن لا نعيش مجرد تحول تقني عابر، بل صياغة كاملة لمفهوم الإنتاجية البشرية.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+                    <div class="glass-card p-5 rounded-2xl text-center space-y-2 border-t-2 border-t-pink-500">
+                        <i class="fa-solid fa-briefcase text-pink-400 text-3xl"></i>
+                        <div class="text-3xl font-black text-white">85 مليون</div>
+                        <div class="text-xs text-pink-300 font-semibold">وظيفة قد تندثر</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">تستبدل بالأتمتة والذكاء الاصطناعي المباشر في العمليات الروتينية.</p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl text-center space-y-2 border-t-2 border-t-emerald-400">
+                        <i class="fa-solid fa-chart-line text-emerald-400 text-3xl"></i>
+                        <div class="text-3xl font-black text-white">97 مليون</div>
+                        <div class="text-xs text-emerald-300 font-semibold">وظيفة جديدة تظهر</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">تتطلب مهارات مبتكرة في التعامل مع البيانات والنمذجة الذكية.</p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl text-center space-y-2 border-t-2 border-t-cyan-400">
+                        <i class="fa-solid fa-rotate text-cyan-400 text-3xl"></i>
+                        <div class="text-3xl font-black text-white">40%</div>
+                        <div class="text-xs text-cyan-300 font-semibold">إعادة تأهيل المهارات</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">من المهارات الحالية للقوى العاملة تحتاج للتحديث خلال 3 سنوات.</p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl text-center space-y-2 border-t-2 border-t-purple-400">
+                        <i class="fa-solid fa-globe text-purple-400 text-3xl"></i>
+                        <div class="text-3xl font-black text-white">15.7$ ترليون</div>
+                        <div class="text-xs text-purple-300 font-semibold">مساهمة اقتصادية</div>
+                        <p class="text-xs text-slate-400 leading-relaxed">في الاقتصاد العالمي بحلول عام 2030 بفضل الذكاء الاصطناعي.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4 rounded-xl flex items-center gap-4 bg-slate-900/80">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-quote-right text-xl"></i>
+                    </div>
+                    <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
+                        "الذكاء الاصطناعي لن يستبدل الإنسان في وظائفه، ولكن الإنسان الذي يستخدم الذكاء الاصطناعي هو من يستبدل الذي لا يستخدمه."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Top Applications across Sectors -->
+        <section class="slide" data-slide="4">
+            <div class="space-y-5">
+                <div class="border-r-4 border-purple-400 pr-4">
+                    <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">المحور الثاني</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">أبرز مجالات تطبيق الذكاء الاصطناعي</h2>
+                    <p class="text-sm text-slate-300 mt-1">تغلغل الذكاء الاصطناعي التوليدي والتحليلي في شتى القطاعات الاقتصادية.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Sector 1 -->
+                    <div class="glass-card p-5 rounded-2xl border-r-4 border-r-cyan-400 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-stethoscope text-cyan-400"></i>
+                                <span>الرعاية الصحية والطب</span>
+                            </h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 font-semibold">دقة متناهية</span>
+                        </div>
+                        <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                            <li>تشخيص الأمراض والأورام المبكرة بدقة تفوق بعض الفحوصات التقليدية.</li>
+                            <li>مساعدة الجراحين عبر الروبوتات الطبية وتحليل المخططات الجينية.</li>
+                            <li>تسريع اكتشاف وتطوير الأدوية من سنوات إلى عدة أشهر.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Sector 2 -->
+                    <div class="glass-card p-5 rounded-2xl border-r-4 border-r-purple-400 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-chart-pie text-purple-400"></i>
+                                <span>المالية والأعمال Banking & Finance</span>
+                            </h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 font-semibold">تحليل لحظي</span>
+                        </div>
+                        <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                            <li>الكشف التلقائي عن الاحتيال المالي وإدارة المخاطر الائتمانية.</li>
+                            <li>خوارزميات التداول الآلي والتنبؤ باتجاهات أسواق الأسهم.</li>
+                            <li>خدمة المستثمرين والمستهلكين عبر المساعدين الماليين المخصصين.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Sector 3 -->
+                    <div class="glass-card p-5 rounded-2xl border-r-4 border-r-pink-400 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-pink-400"></i>
+                                <span>صناعة المحتوى والإعلام</span>
+                            </h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-pink-950 text-pink-300 font-semibold">إبداع آلي</span>
+                        </div>
+                        <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                            <li>التوليد الفوري للنصوص، الصور، الفيديوهات والتصاميم المبتكرة.</li>
+                            <li>تخصيص تجارب المستخدمين واستهداف الإعلانات بدقة عالية.</li>
+                            <li>الترجمة الفورية متعددة اللغات وتطوير المساعدات الصوتية.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Sector 4 -->
+                    <div class="glass-card p-5 rounded-2xl border-r-4 border-r-emerald-400 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-code text-emerald-400"></i>
+                                <span>البرمجة والهندسة</span>
+                            </h3>
+                            <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 font-semibold">سرعة التنفيذ</span>
+                        </div>
+                        <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+                            <li>كتابة واكتشاف الثغرات في البرمجيات وتصحيح الأكواد بفاعلية.</li>
+                            <li>تصميم النماذج الهندسية ثلاثية الأبعاد والمحاكاة الذكية.</li>
+                            <li>أتمتة الاختبارات ومراقبة استقرار الخوادم والأنظمة.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: Automation vs Augmentation -->
+        <section class="slide" data-slide="5">
+            <div class="space-y-6">
+                <div class="border-r-4 border-pink-400 pr-4">
+                    <span class="text-xs text-pink-400 font-bold uppercase tracking-wider">المحور الثالث</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">تأثير الذكاء الاصطناعي: التشغيل الآلي ضد المعاونة البشرية</h2>
+                    <p class="text-sm text-slate-300 mt-1">هل الذكاء الاصطناعي يستبدل الوظائف بالكامل أم يعزز كفاءة العنصر البشري؟</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Automation Card -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-t-red-500 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl text-white">التشغيل الآلي المباشر (Automation)</h3>
+                                <p class="text-xs text-slate-400">استبدال كامل للمهام الروتينية والمكررة</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            يقوم الذكاء الاصطناعي بأداء المهام من البداية حتى النهاية دون حاجة لملاحظة بشرية، خاصة في البيئات ذات الخوارزميات الثابتة.
+                        </p>
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-1">
+                            <span class="text-red-400 font-bold block">أمثلة شائعة:</span>
+                            <div>• الإدخال الآلي للبيانات وتحويل المستندات الورقية.</div>
+                            <div>• الفرز الآلي للمكالمات والرد على الاستفسارات البسيطة.</div>
+                        </div>
+                    </div>
+
+                    <!-- Augmentation Card -->
+                    <div class="glass-card p-6 rounded-2xl border-t-4 border-t-emerald-400 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-user-gear"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl text-white">المعاونة والتكامل (Augmentation)</h3>
+                                <p class="text-xs text-slate-400">مضاعفة إنتاجية الإنسان وتوسيع قدراته</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            يتولى الذكاء الاصطناعي الأجزاء الثقيلة والتحليلية، بينما يتولى الموظف البشري التوجيه، التفكير النقدي، والقرارات النهائية.
+                        </p>
+                        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-1">
+                            <span class="text-emerald-400 font-bold block">أمثلة شائعة:</span>
+                            <div>• طبيب يستخدم AI لتحليل الصور الأشعة بشكل أسرع.</div>
+                            <div>• مصمم ينشئ أفكاراً بدائية فورية ثم يطورها بلمسته الخاصة.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Jobs Under Transformation -->
+        <section class="slide" data-slide="6">
+            <div class="space-y-5">
+                <div class="border-r-4 border-emerald-400 pr-4">
+                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">المحور الرابع</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">تصنيف الوظائف حسب درجة التأثر والخطورة</h2>
+                    <p class="text-sm text-slate-300 mt-1">تفاوت نسبة الأمان والتهديد بين مختلف التخصصات والمهن.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- High Risk -->
+                    <div class="glass-card p-5 rounded-2xl border-r-4 border-r-red-500 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                                <span>وظائف تحت الخطر العالي</span>
+                            </h3>
+                            <span class="px-2.5 py-1 rounded-full bg-red-950 text-red-300 text-xs font-bold">مهددة بالأتمتة</span>
+                        </div>
+                        <div class="space-y-2 text-xs text-slate-300">
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>مدخلو البيانات والكاتبون</span>
+                                <span class="text-red-400 font-bold">خطر 85%</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>خدمة العملاء التقليدية (المستوى الأول)</span>
+                                <span class="text-red-400 font-bold">خطر 78%</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>المترجمون المباشرون للنصوص العادية</span>
+                                <span class="text-red-400 font-bold">خطر 70%</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>أمناء الأرشيف وإداريو الحسابات البسيطة</span>
+                                <span class="text-red-400 font-bold">خطر 68%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Low Risk -->
+                    <div class="glass-card p-5 rounded-2xl border-r-4 border-r-emerald-400 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                                <span>وظائف آمنة / منخفضة الخطر</span>
+                            </h3>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-300 text-xs font-bold">مرتفعة الأمان</span>
+                        </div>
+                        <div class="space-y-2 text-xs text-slate-300">
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>القادة التنفيذيون والمخططون الاستراتيجيون</span>
+                                <span class="text-emerald-400 font-bold">خطر 12%</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>الأطباء النفسيون وأخصائيو التوجيه الاجتماعي</span>
+                                <span class="text-emerald-400 font-bold">خطر 8%</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>المهندسون والحرفيون في الميدان غير النمطي</span>
+                                <span class="text-emerald-400 font-bold">خطر 15%</span>
+                            </div>
+                            <div class="p-2.5 bg-slate-900/70 rounded-lg flex justify-between items-center">
+                                <span>الفنانون وأصحاب الابتكار الإنساني الخالص</span>
+                                <span class="text-emerald-400 font-bold">خطر 18%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Emerging Future Jobs -->
+        <section class="slide" data-slide="7">
+            <div class="space-y-5">
+                <div class="border-r-4 border-amber-400 pr-4">
+                    <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">المحور الخامس</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">الوظائف الجديدة المتوقع ظهورها مستقبلاً</h2>
+                    <p class="text-sm text-slate-300 mt-1">تخصصات حديثة خلقتها الحاجة للتحكم وإدارة الذكاء الاصطناعي.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="glass-card p-5 rounded-xl space-y-2 border-t-2 border-t-amber-400">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-terminal"></i>
+                        </div>
+                        <h3 class="font-extrabold text-white text-base">مهندس أوامر (Prompt Engineer)</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            متخصص في صياغة الاستعلامات المتقدمة للنماذج التوليدية للحصول على أفضل دقة وجودة مخرجات.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl space-y-2 border-t-2 border-t-purple-400">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h3 class="font-extrabold text-white text-base">أخصائي أخلاقيات (AI Ethics Officer)</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            مراقب لضمان عدم وجود تحيز في الخوارزميات، وحماية خصوصية بيانات المستخدمين والامتثال للقوانين.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl space-y-2 border-t-2 border-t-cyan-400">
+                        <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="font-extrabold text-white text-base">مدرب ومدقق نماذج الذكاء الاصطناعي</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            يقوم بتقييم ردود الذكاء الاصطناعي وتعديل مسارات التعلم لتفادي الأخطاء الكارثية والهلوثة الرقمية.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl space-y-2 border-t-2 border-t-emerald-400">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h3 class="font-extrabold text-white text-base">مستشار دمج الذكاء الاصطناعي</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            يساعد الشركات والمؤسسات على إعادة هيكلة أعمالها لدمج الأدوات الذكية في أساليب عملها اليومية.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl space-y-2 border-t-2 border-t-pink-400">
+                        <div class="w-10 h-10 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="font-extrabold text-white text-base">منسق جودة البيانات (Data Curator)</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            مسؤول عن تجهيز وتنظيف البيانات الحساسة الضخمة قبل تغذية الخوارزميات والنماذج البرمجية بها.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl space-y-2 border-t-2 border-t-blue-400">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="font-extrabold text-white text-base">مصمم التفاعل بين الإنسان والآلة</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            تطوير واجهات التفاعل البرمجية ليصبح التواصل مع الآلات سلسًا وطبيعيًا كالتواصل البشري.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: Human vs AI Matrix -->
+        <section class="slide" data-slide="8">
+            <div class="space-y-5">
+                <div class="border-r-4 border-blue-400 pr-4">
+                    <span class="text-xs text-blue-400 font-bold uppercase tracking-wider">المحور السادس</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">مصفوفة المهارات: تفوق الإنسان مقابل قوة الذكاء الاصطناعي</h2>
+                    <p class="text-sm text-slate-300 mt-1">تحديد مكامن القوة لكل طرف لبناء نمط عمل تكاملي ناجح.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Human Strengths -->
+                    <div class="glass-card p-6 rounded-2xl border-r-4 border-r-cyan-400 space-y-4">
+                        <h3 class="font-extrabold text-xl text-cyan-400 flex items-center gap-2">
+                            <i class="fa-solid fa-user-check"></i>
+                            <span>نقاط التفوق البشري الفريدة</span>
+                        </h3>
+                        <div class="space-y-3 text-xs text-slate-200">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-lightbulb text-cyan-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">التفكير النقدي والإبداع الخالص:</strong>
+                                    ابتكار أفكار جديدة كلياً خارج النطاق والأنماط التاريخية المخزنة.
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-heart text-cyan-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">الذكاء العاطفي والتعاطف:</strong>
+                                    بناء العلاقات، القيادة الملهمة، والتفاوض القائم على المشاعر الإنسانية.
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-gavel text-cyan-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">الحكم الأخلاقي والحكمة:</strong>
+                                    اتخاذ القرارات الصعبة في المواقف المعقدة والمبهمة أخلاقياً.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Strengths -->
+                    <div class="glass-card p-6 rounded-2xl border-r-4 border-r-purple-400 space-y-4">
+                        <h3 class="font-extrabold text-xl text-purple-400 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>نقاط قوة الذكاء الاصطناعي</span>
+                        </h3>
+                        <div class="space-y-3 text-xs text-slate-200">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-gauge-high text-purple-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">السرعة الفائقة والإنتاجية:</strong>
+                                    إنجاز المهام في ثوانٍ معدودة مقارنة بساعات طويلة للعمل البشري.
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-network-wired text-purple-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">معالجة البيانات الضخمة (Big Data):</strong>
+                                    تحليل ملايين السجلات والأنماط في لحظات وبدقة عالية.
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-clock text-purple-400 mt-1"></i>
+                                <div>
+                                    <strong class="text-white block">الاستمرارية والعمل 24/7:</strong>
+                                    أداء المهام بلا كلل أو إرهاق وبدرجة استقرار ثابتة في المخرجات.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: Key Advantages -->
+        <section class="slide" data-slide="9">
+            <div class="space-y-5">
+                <div class="border-r-4 border-emerald-400 pr-4">
+                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">المحور السابع</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">مميزات دمج الذكاء الاصطناعي في بيئة العمل</h2>
+                    <p class="text-sm text-slate-300 mt-1">كيف تستفيد الشركات والمؤسسات من تبني الأدوات الذكية؟</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">رفع الكفاءة التشغيلية</h3>
+                            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                                تقليل الزمن المستغرق لإنجاز المشاريع الكبيرة بنسب تصل إلى 60% مع ضمان الجودة العالية.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">دقة التنبؤ والقرارات</h3>
+                            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                                اتخاذ قرارات مبنية على بيانات دقيقة وتحليلات تنبؤية تقلل الشطط ونسبة الخطأ.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">خفض التكاليف التشغيلية</h3>
+                            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                                تحسين استغلال الموارد وتوجيه النفقات للأنشطة ذات القيمة المضافة العالية.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">تعزيز تجربة العملاء</h3>
+                            <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                                استجابة فورية وحلول مخصصة لكل عميل على مدار الساعة وبدون فترة انتظار.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: Challenges & Risks -->
+        <section class="slide" data-slide="10">
+            <div class="space-y-5">
+                <div class="border-r-4 border-red-500 pr-4">
+                    <span class="text-xs text-red-400 font-bold uppercase tracking-wider">المحور الثامن</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">التحديات والمخاوف الرئيسية</h2>
+                    <p class="text-sm text-slate-300 mt-1">العقبات التي يجب معالجتها بحذر عند توسيع الاعتماد على الذكاء الاصطناعي.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="glass-card p-5 rounded-2xl border-b-4 border-b-red-500 space-y-3">
+                        <div class="w-10 h-10 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-user-slash"></i>
+                        </div>
+                        <h3 class="font-bold text-white text-base">الفقدان المؤقت للوظائف</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            تسريح العمالة التقليدية قبل إتاحة الفرصة لإعادة تأهيلهم في أدوار تقنية جديدة.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl border-b-4 border-b-amber-500 space-y-3">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="font-bold text-white text-base">الخصوصية والأمن السيبراني</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            مخاطر تسريب البيانات الحساسة وثغرات الأمان عند تدريب النماذج على قواعد بيانات غير مؤمنة.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl border-b-4 border-b-purple-500 space-y-3">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="font-bold text-white text-base">اتساع الفجوة المهارية</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            صعوبة مواكبة المناهج التعليمية وسوق العمل لسرعة وتيرة التطور التقني المذهلة.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: Preparation Roadmap -->
+        <section class="slide" data-slide="11">
+            <div class="space-y-5">
+                <div class="border-r-4 border-cyan-400 pr-4">
+                    <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider">المحور التاسع</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">خارطة الطريق: كيف نستعد لسوق العمل؟</h2>
+                    <p class="text-sm text-slate-300 mt-1">خطة عمل عملية من 5 خطوات للأفراد والشركات للتعايش والنجاح.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3 pt-2">
+                    <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-cyan-400">
+                        <div class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 font-bold mx-auto flex items-center justify-center text-sm">1</div>
+                        <h4 class="font-bold text-white text-xs">تقييم المهام</h4>
+                        <p class="text-[11px] text-slate-400">تحديد الأجزاء الروتينية القابلة للأتمتة في عملك اليومي.</p>
+                    </div>
+
+                    <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-purple-400">
+                        <div class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold mx-auto flex items-center justify-center text-sm">2</div>
+                        <h4 class="font-bold text-white text-xs">إتقان الأدوات</h4>
+                        <p class="text-[11px] text-slate-400">تعلم مهارات هندسة الأوامر والأدوات الذكية في تخصصك.</p>
+                    </div>
+
+                    <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-pink-400">
+                        <div class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 font-bold mx-auto flex items-center justify-center text-sm">3</div>
+                        <h4 class="font-bold text-white text-xs">المهارات الناعمة</h4>
+                        <p class="text-[11px] text-slate-400">تطوير القيادة، التفكير النقدي، والتواصل الإنساني.</p>
+                    </div>
+
+                    <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-amber-400">
+                        <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 font-bold mx-auto flex items-center justify-center text-sm">4</div>
+                        <h4 class="font-bold text-white text-xs">العقلية الهجينة</h4>
+                        <p class="text-[11px] text-slate-400">اعتبار الذكاء الاصطناعي شريكًا ومساعدًا وليس منافسًا.</p>
+                    </div>
+
+                    <div class="glass-card p-4 rounded-xl text-center space-y-2 border-t-2 border-t-emerald-400">
+                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 font-bold mx-auto flex items-center justify-center text-sm">5</div>
+                        <h4 class="font-bold text-white text-xs">التعلم المستمر</h4>
+                        <p class="text-[11px] text-slate-400">جعل مواكبة المستجدات التقنية عادة أسبوعية دائمة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: Conclusion & Q&A -->
+        <section class="slide" data-slide="12">
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500 via-purple-500 to-pink-500 mx-auto flex items-center justify-center text-white text-3xl shadow-glow-cyan">
+                    <i class="fa-solid fa-flag-checkered"></i>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-black text-white">الخاتمة والجلسة التفاعلية</h2>
+
+                <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                    الذكاء الاصطناعي ليس نهاية طريق العمل البشري، بل هو بداية فصل جديد يتطلب منا المرونة والقدرة العالية على التكيف والتطور.
+                </p>
+
+                <div class="glass-card p-6 rounded-2xl border border-cyan-500/30 space-y-3">
+                    <h3 class="font-bold text-cyan-400 text-lg">أسئلة للاستكشاف والمناقشة:</h3>
+                    <ul class="text-xs md:text-sm text-slate-200 space-y-2 text-right list-disc list-inside">
+                        <li>ما هي أول وظيفة روتينية في مؤسستك يمكن تحويلها للذكاء الاصطناعي غداً؟</li>
+                        <li>كيف يمكنك قياس عائد الاستثمار عند الاستثمار في تدريب الموظفين على أدوات AI؟</li>
+                    </ul>
+                </div>
+
+                <div class="pt-2 flex flex-wrap justify-center gap-4">
+                    <button onclick="goToSlide(1)" class="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right text-cyan-400"></i>
+                        <span>إعادة العرض من البداية</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Controls Bar -->
+    <footer class="relative z-10 w-full px-6 py-3 border-t border-slate-800/80 bg-slate-950/60 backdrop-blur-md flex justify-between items-center">
+        <!-- Navigation Buttons -->
+        <div class="flex items-center gap-3">
+            <button id="prevBtn" onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition flex items-center gap-2 disabled:opacity-40">
+                <i class="fa-solid fa-chevron-right"></i>
+                <span>السابقة</span>
+            </button>
+
+            <button id="nextBtn" onclick="nextSlide()" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold transition flex items-center gap-2">
+                <span>التالية</span>
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+        </div>
+
+        <!-- Slide Counter Indicator -->
+        <div class="text-xs text-slate-400 font-semibold flex items-center gap-2">
+            <span>الشريحة</span>
+            <span id="currentSlideNum" class="text-cyan-400 font-extrabold text-sm">1</span>
+            <span>من</span>
+            <span id="totalSlidesNum" class="text-slate-300 font-bold">12</span>
+        </div>
+
+        <!-- Play / Auto Slide Toggle -->
+        <div class="flex items-center gap-2">
+            <button id="autoPlayBtn" onclick="toggleAutoPlay()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition flex items-center gap-2">
+                <i id="playIcon" class="fa-solid fa-play text-emerald-400"></i>
+                <span id="playText" class="hidden md:inline">تشغيل تلقائي</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Presenter Notes Drawer (Modal) -->
+    <div id="notesModal" class="fixed inset-x-0 bottom-0 z-50 transform translate-y-full transition-transform duration-300 ease-in-out bg-slate-900/95 border-t border-cyan-500/30 p-6 backdrop-blur-xl shadow-2xl max-h-[40vh] overflow-y-auto">
+        <div class="max-w-4xl mx-auto space-y-3">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                <div class="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <span>ملاحظات الملقي للشريحة الشارحة (Presenter Notes)</span>
+                </div>
+                <button onclick="toggleNotes()" class="text-slate-400 hover:text-white text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p id="presenterNotesContent" class="text-xs md:text-sm text-slate-300 leading-relaxed font-sans">
+                <!-- Dynamic Content via JS -->
+            </p>
+        </div>
+    </div>
+
+    <!-- Thumbnails Overview Grid Modal -->
+    <div id="gridModal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md p-6 overflow-y-auto">
+        <div class="max-w-6xl mx-auto space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-border-all text-cyan-400"></i>
+                    <span>جميع شرائح العرض التقديمي</span>
+                </h2>
+                <button onclick="closeModal('gridModal')" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="gridThumbnails" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <!-- Dynamically Generated Thumbnails -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Presentation Engine -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+        let autoPlayInterval = null;
+        let isAutoPlaying = false;
+
+        // Presenter Notes Database for all 12 slides
+        const notesData = {
+            1: "مرحباً بالحضور. في هذه الشريحة الافتتاحية نرحب بالعميل ونستعرض العرض بشكل عام كخارطة طريق واضحة تجمع بين الأرقام الدقيقة والحلول العملية المباشرة.",
+            2: "جدول المحتويات يستعرض الأقسام الستة الأساسية للعرض، مما يعطي انطباعاً للتنظيم الشديد والاحترافية منذ الدقيقة الأولى.",
+            3: "نبرز هنا أرقام المنتدى الاقتصادي العالمي (WEF)، الفكرة ليست إخافة الحضور بل إبراز الفرص الـ 97 مليون التي تعوض الوظائف التقليدية.",
+            4: "ركز هنا عند الشرح على القطاع المتخصص بالعميل، مثلاً إذا كان العميل مهتم بالأعمال المالية، استفيض في شرح خوارزميات الائتمان والاحتيال.",
+            5: "هذه شريحة جوهرية! وضح للعميل الفرق بين الاستبدال الكلي (Automation) وبين التعزيز (Augmentation) ليتأكد أن الذكاء الاصطناعي صديق للموظفين.",
+            6: "استعرض التصنيف بكل شفافية، وأكد أن الوظائف المهددة هي التي تفتقر للإبداع الإنساني والتفاعل المباشر.",
+            7: "وظائف المستقبل هي النقطة الأكثر إثارة لاهتمام الحاضرين، ناقش مهندس الأوامر (Prompt Engineer) وأخصائي الأخلاقيات كأمثلة واقعية.",
+            8: "استخدم مصفوفة المهارات للتأكيد على أن الإنسان يمتلك التفكير النقدي والتعاطف، بينما تمتلك الآلة السرعة والقدرة على المعالجة.",
+            9: "هذه الشريحة موجهة لأصحاب القرار والشركات للتركيز على العائد الاستثماري (ROI) وارتفاع الإنتاجية بنسبة تصل إلى 60%.",
+            10: "إظهار المخاطر والتحديات يزيد من مصداقية العرض أمام المستثمرين والعملاء، حيث يظهر أنك محايد وتفهم كافة الأبعاد.",
+            11: "خارطة الطريق المكونة من 5 خطوات تقدم قيمة عملية حقيقية يستطيع العميل تطبيقها فوراً داخل مؤسسته.",
+            12: "اختم بعبارة قوية وافتح المجال للأسئلة مع التأكيد على جاهزيتك لتنفيذ أي تعديلات أو تصميم عروض مخصصة إضافية."
+        };
+
+        // Initialize Slides
+        function updateSlide() {
+            // Update slides visibility
+            document.querySelectorAll('.slide').forEach((slide, idx) => {
+                const slideNum = idx + 1;
+                if (slideNum === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update bottom progress bar
+            const progressPercent = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+            // Update Counter
+            document.getElementById('currentSlideNum').innerText = currentSlide;
+
+            // Update Prev/Next Buttons disabled state
+            document.getElementById('prevBtn').disabled = (currentSlide === 1);
+            
+            // Update Presenter Notes
+            document.getElementById('presenterNotesContent').innerText = notesData[currentSlide] || "لا توجد ملاحظات لهذه الشريحة.";
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+            } else {
+                currentSlide = 1; // Loop back
+            }
+            updateSlide();
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(slideNum) {
+            currentSlide = slideNum;
+            updateSlide();
+            closeModal('gridModal');
+        }
+
+        // Auto Play Feature
+        function toggleAutoPlay() {
+            const playIcon = document.getElementById('playIcon');
+            const playText = document.getElementById('playText');
+
+            if (isAutoPlaying) {
+                clearInterval(autoPlayInterval);
+                isAutoPlaying = false;
+                playIcon.className = "fa-solid fa-play text-emerald-400";
+                playText.innerText = "تشغيل تلقائي";
+            } else {
+                isAutoPlaying = true;
+                playIcon.className = "fa-solid fa-pause text-amber-400";
+                playText.innerText = "إيقاف مؤقت";
+                autoPlayInterval = setInterval(() => {
+                    nextSlide();
+                }, 5000);
+            }
+        }
+
+        // Modal Helpers
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function toggleNotes() {
+            const modal = document.getElementById('notesModal');
+            modal.classList.toggle('translate-y-full');
+        }
+
+        document.getElementById('toggleNotesBtn').addEventListener('click', toggleNotes);
+        document.getElementById('toggleGridBtn').addEventListener('click', () => {
+            renderGridThumbnails();
+            openModal('gridModal');
+        });
+
+        // Fullscreen Toggle
+        document.getElementById('fullscreenBtn').addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // Render Thumbnails in Overview Grid
+        function renderGridThumbnails() {
+            const container = document.getElementById('gridThumbnails');
+            container.innerHTML = '';
+
+            const slideTitles = [
+                "الشريحة الرئيسية",
+                "جدول المحتويات",
+                "المقدمة والإحصائيات",
+                "مجالات التطبيق",
+                "الأتمتة ضد المعاونة",
+                "تصنيف خطورة الوظائف",
+                "الوظائف المستحدثة",
+                "مصفوفة المهارات",
+                "مميزات الذكاء الاصطناعي",
+                "التحديات والمخاوف",
+                "خارطة الطريق",
+                "الخاتمة والأسئلة"
+            ];
+
+            for (let i = 1; i <= totalSlides; i++) {
+                const thumb = document.createElement('div');
+                thumb.className = `glass-card p-4 rounded-xl cursor-pointer border ${i === currentSlide ? 'border-cyan-400 bg-cyan-950/40' : 'border-slate-800'} hover:border-cyan-400 transition flex flex-col justify-between h-32`;
+                thumb.onclick = () => goToSlide(i);
+                thumb.innerHTML = `
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-bold text-cyan-400">0${i}</span>
+                        ${i === currentSlide ? '<span class="w-2 h-2 rounded-full bg-cyan-400"></span>' : ''}
+                    </div>
+                    <div class="text-sm font-bold text-white text-right leading-tight">${slideTitles[i-1]}</div>
+                    <div class="text-[10px] text-slate-500 text-right">انقر للانتقال</div>
+                `;
+                container.appendChild(thumb);
+            }
+        }
+
+        // Keyboard Navigation (RTL Navigation Logic)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                // In RTL, Left Arrow moves to Next slide
+                nextSlide();
+            } else if (e.key === 'ArrowRight') {
+                // In RTL, Right Arrow moves to Prev slide
+                prevSlide();
+            } else if (e.key === 'Space') {
+                nextSlide();
+            } else if (e.key === 'Escape') {
+                closeModal('gridModal');
+            }
+        });
+
+        // Touch Swipe Navigation for Mobile
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+
+        function handleGesture() {
+            if (touchendX < touchstartX - 50) {
+                // Swiped Left -> Next in RTL
+                nextSlide();
+            }
+            if (touchendX > touchstartX + 50) {
+                // Swiped Right -> Prev in RTL
+                prevSlide();
+            }
+        }
+
+        // Start On Load
+        window.onload = function() {
+            updateSlide();
+        };
+    </script>
+</body>
+</html>
